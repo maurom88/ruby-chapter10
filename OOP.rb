@@ -43,8 +43,11 @@ class User
         end
     end
 
-
-
+    def print_test_array
+        print "Test array: "
+        test_array.each { |test_value| print("#{test_value} ") }
+        print "\n"
+    end
 end
 
 class Teacher < User
@@ -52,7 +55,7 @@ class Teacher < User
     attr_reader :language, :languages
 
     def initialize(email, password, languages = [])
-        super(email, password, test_array)
+        super(email, password)
         @languages = languages
     end
 
@@ -75,7 +78,7 @@ class Employer < User
     attr_reader :employees
 
     def initialize(email, password, employees = [])
-        super(email, password, test_array)
+        super(email, password)
         @employees = employees
     end
 
@@ -93,7 +96,7 @@ class Administrator < User
     attr_reader :rights
 
     def initialize(email, password, rights = ["read", "write"])
-        super(email, password, test_array)
+        super(email, password)
         @rights = rights
     end
 
@@ -108,6 +111,7 @@ puts " --- "
 admin = Administrator.new("admin@website.com", "adminpass")
 admin.login("admin@website.com", "adminpass")
 admin.print_rights
+admin.print_test_array
 admin.logout
 
 puts " --- "
@@ -118,5 +122,6 @@ teacher.login("teacher@website.com", "teacherpass")
 teacher.language = "English"
 teacher.language = "Spanish"
 teacher.print_languages
+teacher.print_test_array
 
 puts " --- "
