@@ -1,4 +1,8 @@
+require_relative 'mixins'
+
 class User
+
+    include Call, Walk, Actions
 
     attr_reader :id, :logged_in, :email, :password, :test_array
 
@@ -136,3 +140,5 @@ admin.remove_last_test_array_value(admin.email)
 teacher.remove_last_test_array_value(teacher.email)
 
 puts " --- "
+
+teacher.eat_lunch
