@@ -1,6 +1,6 @@
 class User
 
-    attr_reader :id, :logged_in, :email, :password
+    attr_reader :id, :logged_in, :email, :password, :test_array
 
     def email=(value)
         if value == ""
@@ -16,9 +16,10 @@ class User
         @password = value
     end
 
-    def initialize(email = "user@example.com", password = "xxxxxx")
+    def initialize(email = "user@example.com", password = "xxxxxx", test_array = [1, 2, 3, 4])
         @email = email
         @password = password
+        @test_array = test_array
     end
 
     def login(input_email = nil, input_password = nil)
@@ -42,6 +43,8 @@ class User
         end
     end
 
+
+
 end
 
 class Teacher < User
@@ -49,7 +52,7 @@ class Teacher < User
     attr_reader :language, :languages
 
     def initialize(email, password, languages = [])
-        super(email, password)
+        super(email, password, test_array)
         @languages = languages
     end
 
@@ -62,25 +65,58 @@ class Teacher < User
     end
 
     def print_languages
+        print "Teacher languages: "
         p @languages
     end
 end
 
 class Employer < User
+
+    attr_reader :employees
+
+    def initialize(email, password, employees = [])
+        super(email, password, test_array)
+        @employees = employees
+    end
+
+    def employees=(value)
+        if value == ""
+            raise "Please enter an employess name."
+        else
+            @employees << value
+        end
+    end
 end
 
 class Administrator < User
+
+    attr_reader :rights
+
+    def initialize(email, password, rights = ["read", "write"])
+        super(email, password, test_array)
+        @rights = rights
+    end
+
+    def print_rights
+        print "Adming rights: "
+        p @rights
+    end
 end
 
+puts " --- "
 
-admin = Administrator.new("a", "b")
-puts admin.email
-puts admin.password
-
-admin.login("a", "b")
+admin = Administrator.new("admin@website.com", "adminpass")
+admin.login("admin@website.com", "adminpass")
+admin.print_rights
 admin.logout
 
-teacher = Teacher.new("c", "d")
+puts " --- "
+
+teacher = Teacher.new("teacher@website.com", "teacherpass")
+teacher.login("admin@website.com", "adminpass")
+teacher.login("teacher@website.com", "teacherpass")
 teacher.language = "English"
 teacher.language = "Spanish"
 teacher.print_languages
+
+puts " --- "
