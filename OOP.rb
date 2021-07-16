@@ -1,7 +1,6 @@
 class User
 
-    attr_reader :id
-    attr_accessor :email, :password, :logged_in
+    attr_reader :id, :logged_in, :email, :password
 
     def email=(value)
         if value == ""
@@ -46,6 +45,25 @@ class User
 end
 
 class Teacher < User
+
+    attr_reader :language, :languages
+
+    def initialize(email, password, languages = [])
+        super(email, password)
+        @languages = languages
+    end
+
+    def language=(value)
+        if value == ""
+            raise "Please enter a language."
+        else
+            @languages << value
+        end
+    end
+
+    def print_languages
+        p @languages
+    end
 end
 
 class Employer < User
@@ -54,11 +72,15 @@ end
 class Administrator < User
 end
 
-puts Employer.new.email
-puts Teacher.new.password
+
 admin = Administrator.new("a", "b")
 puts admin.email
 puts admin.password
 
 admin.login("a", "b")
 admin.logout
+
+teacher = Teacher.new("c", "d")
+teacher.language = "English"
+teacher.language = "Spanish"
+teacher.print_languages
