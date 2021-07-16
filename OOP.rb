@@ -1,7 +1,7 @@
 class User
 
     attr_reader :id
-    attr_accessor :email, :password
+    attr_accessor :email, :password, :logged_in
 
     def email=(value)
         if value == ""
@@ -22,6 +22,27 @@ class User
         @password = password
     end
 
+    def login(input_email = nil, input_password = nil)
+        if input_email && input_password
+            if input_email == @email && input_password == @password
+                puts "Welcome, #{@email}!"
+                @logged_in = true
+            else
+                puts "Incorrect email or password."
+                @logged_in = false
+            end
+        else
+            puts "Please enter email and password."
+            @logged_in = false
+        end
+    end
+
+    def logout
+        if @email && @logged_in
+            puts "Goodbye #{@email}!"
+        end
+    end
+
 end
 
 class Teacher < User
@@ -38,3 +59,6 @@ puts Teacher.new.password
 admin = Administrator.new("a", "b")
 puts admin.email
 puts admin.password
+
+admin.login("a", "b")
+admin.logout
