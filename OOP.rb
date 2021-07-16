@@ -17,9 +17,9 @@ class User
         @password = value
     end
 
-    def initialize
-        @email = "user@example.com"
-        @password = "xxxxxx"
+    def initialize(email = "user@example.com", password = "xxxxxx")
+        @email = email
+        @password = password
     end
 
 end
@@ -33,4 +33,8 @@ end
 class Administrator < User
 end
 
-puts User.new.email
+puts Employer.new.email
+puts Teacher.new.password
+admin = Administrator.new("a", "b")
+puts admin.email
+puts admin.password
