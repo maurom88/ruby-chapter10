@@ -48,6 +48,12 @@ class User
         test_array.each { |test_value| print("#{test_value} ") }
         print "\n"
     end
+
+    def remove_last_test_array_value(email)
+        @test_array.pop
+        print "New array for #{@email}: "
+        p @test_array
+    end
 end
 
 class Teacher < User
@@ -123,5 +129,10 @@ teacher.language = "English"
 teacher.language = "Spanish"
 teacher.print_languages
 teacher.print_test_array
+
+puts " --- "
+
+admin.remove_last_test_array_value(admin.email)
+teacher.remove_last_test_array_value(teacher.email)
 
 puts " --- "
